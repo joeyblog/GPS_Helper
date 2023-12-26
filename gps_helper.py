@@ -1,10 +1,18 @@
 import subprocess
 import math
 
+teleported = []
+
 def teleport(lat, lon):
-    print(f"teleport to {lat}, {lon}")
-    cmd = f"adb shell am start-foreground-service -a theappninjas.gpsjoystick.TELEPORT --ef lat {lat} --ef lng {lon}"
-    subprocess.run(cmd, shell=True)  
+    # 座標がすでにテレポートされているか確認
+    if (lat, lon) in teleported:
+        print(f"[!] Already teleported to {lat}, {lon}")
+    else:
+        print(f"[-] Teleporting to {lat}, {lon}")
+        cmd = f"adb shell am start-foreground-service -a theappninjas.gpsjoystick.TELEPORT --ef lat {lat} --ef lng {lon}"
+        subprocess.run(cmd, shell=True)
+        # テレポートした座標を記録
+        teleported.append((lat, lon))
 
 #coord : "34.665713,135.519930"
 def parse(coord):

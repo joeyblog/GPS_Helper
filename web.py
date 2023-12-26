@@ -17,6 +17,8 @@ if 'lon' not in st.session_state:
     st.session_state.lon = "139.7649361"
 if 'msg' not in st.session_state:
     st.session_state.msg = ""
+if 'coord' not in st.session_state:
+    st.session_state.coord = ""
 
 def send_tp():
     lat = st.session_state.lat
